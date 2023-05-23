@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .circle-container {
+      width: 600px;
+      height: 600px;
+      position: relative;
+    }
+
+    .circle {
+      width: 600px;
+      height: 600px;
+      border: 2px solid black;
+      border-radius: 50%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .text {
+      font-size: 16px;
+      position: absolute;
+    }
+
+    .letter {
+      background-color: black;
+      color: white;
+      padding: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="circle-container">
+    <div class="circle">
+      <span class="text">Hello World!</span>
+    </div>
+  </div>
+
+  <script>
+    const text = document.querySelector('.text');
+    const circle = document.querySelector('.circle');
+    const radius = 300;
+    const textLength = text.textContent.length;
+    const angle = (2 * Math.PI) / textLength;
+
+    const letterSpacing = 2; // Spacing between letters in pixels
+
+    for (let i = 0; i < textLength; i++) {
+      const letter = text.textContent[i];
+      const span = document.createElement('span');
+      span.textContent = letter;
+      span.className = 'letter'; // Add 'letter' class to each letter
+      const x = Math.cos(angle * i) * radius;
+      const y = Math.sin(angle * i) * radius;
+      const rotation = -angle * i;
+      span.style.transform = `translate(${x}px, ${y}px) rotate(${rotation}rad) translateX(${letterSpacing}px)`;
+      circle.appendChild(span);
+    }
+    text.style.display = 'none';
+  </script>
+</body>
+</html>
